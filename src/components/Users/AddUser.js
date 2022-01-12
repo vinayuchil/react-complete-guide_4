@@ -10,7 +10,17 @@ const AddUser = (props) => {
 
   const AddUserHandler = (event) => {
     event.preventDefault();
+    if (enteredUserName.trim().length === 0 || enteredAge.trim().length === 0) {
+      return;
+    }
+
+    if (+enteredAge < 1) {
+      return;
+    }
+
     console.log(enteredUserName, enteredAge);
+    setEnteredUserName("");
+    setEnteredAge("");
   };
 
   const usernameChangeHandler = (event) => {
@@ -28,11 +38,17 @@ const AddUser = (props) => {
         <input
           id="username"
           type="text"
+          value={enteredUserName}
           onChange={usernameChangeHandler}
         ></input>
 
         <label htmlFor="age">Age</label>
-        <input id="age" type="number" onChange={ageChangeHandler}></input>
+        <input
+          id="age"
+          type="number"
+          value={enteredAge}
+          onChange={ageChangeHandler}
+        ></input>
 
         <Button type="submit">Add User</Button>
       </form>
